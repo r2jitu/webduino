@@ -1,16 +1,11 @@
 <!doctype html>
 <html>
 <head>
-  <title>Webduino</title>
+  <title>Robot - Webduino</title>
   <script src="/socket.io/socket.io.js"></script>
+  <script src="/common.js"></script>
   <script>
     var socket = io.connect();
-
-    function ledToggle(device) {
-      socket.emit('led toggle', {
-        device: device
-      });
-    }
 
     function robot(data) {
       socket.emit('robot', data);
@@ -18,9 +13,6 @@
   </script>
 </head>
 <body>
-  <button onclick="ledToggle('light')">Toggle LED - light</button>
-  <button onclick="ledToggle('robot')">Toggle LED - robot</button>
-  <hr>
   <button style="width: 200px;" onclick="robot({left: 255})">Left forward</button>
   <button style="width: 200px;" onclick="robot({right: 255})">Right forward</button>
   <br>

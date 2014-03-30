@@ -4,6 +4,7 @@
   "dependencies": {
     "duino": "r2jitu/duino",
     "jsonfile": ">= 1.1.1",
-    "socket.io": ">= 0.9"
+    "socket.io": ">= 0.9",
+    "connect": "^2.14.3"
   }
 }

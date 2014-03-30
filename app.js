@@ -1,5 +1,5 @@
-var app = require('http').createServer(handler)
-  , io = require('socket.io').listen(app)
+var http = require('http')
+  , connect = require('connect')
   , fs = require('fs')
   , jf = require('jsonfile')
   , util = require('util')
@@ -12,21 +12,7 @@ if (process.argv.length < 3) {
 var config = jf.readFileSync(process.argv[2]);
 console.log('Using config: ' + util.inspect(config));
 
-app.listen(8080);
-
-function handler(req, res) {
-  fs.readFile(__dirname + '/index.html',
-  function (err, data) {
-    if (err) {
-      res.writeHead(500);
-      return res.end('Error loading index.html');
-    }
-
-    res.writeHead(200);
-    res.end(data);
-  });
-}
-
+// Load the devices
 var devices = {};
 for (var deviceName in config.devices) {
   var descriptor = config.devices[deviceName];
@@ -39,7 +25,19 @@ for (var deviceName in config.devices) {
   }
 }
 
+// Start the web server
+var app = connect()
+    .use(connect.logger('dev'))
+    .use(connect.static('www'))
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
+server.listen(8080);
+
+// Listen to web sockets
 io.sockets.on('connection', function (socket) {
+  //socket.emit('devices', Object.keys(devices));
+  socket.emit('devices', Object.keys(config.devices));
+
   socket.on('led toggle', function (data) {
     var device = devices[data.device];
     if (device && device.board) {
