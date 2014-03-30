@@ -1,0 +1,8 @@
+{
+  "name": "webduino",
+  "description": "Webduino",
+  "dependencies": {
+    "socket.io": ">= 0.9",
+    "duino": "r2jitu/duino"
+  }
+}

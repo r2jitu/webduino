@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <title>Webduino</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io.connect();
+
+    function ledToggle(device) {
+      socket.emit('led toggle', {
+        device: device
+      });
+    }
+
+    function setAnalog(value) {
+      socket.emit('analogWrite', { value: value });
+    }
+
+    function robot(data) {
+      socket.emit('robot', data);
+    }
+  </script>
+</head>
+<body>
+  <button onclick="ledToggle('light')">Toggle LED - light</button>
+  <button onclick="ledToggle('robot')">Toggle LED - robot</button>
+  <hr>
+  <input id="analogVal" value="0">
+  <button onclick="setAnalog(parseInt(document.getElementById('analogVal').value))">Set analog</button>
+  <hr>
+  <button style="width: 200px;" onclick="robot({left: 255})">Left forward</button>
+  <button style="width: 200px;" onclick="robot({right: 255})">Right forward</button>
+  <br>
+  <button style="width: 200px;" onclick="robot({left: 0})">Left stop</button>
+  <button style="width: 200px;" onclick="robot({right: 0})">Right stop</button>
+  <br>
+  <button style="width: 200px;" onclick="robot({left: -255})">Left backward</button>
+  <button style="width: 200px;" onclick="robot({right: -255})">Right backward</button>
+</body>
+</html>
