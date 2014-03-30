@@ -1,6 +1,6 @@
 var socket = io.connect();
 
-socket.on('devices', function(devices) {
+/* socket.on('devices', function(devices) {
   var deviceSelector = document.createElement('div');
   deviceSelector.appendChild(document.createElement('hr'));
   deviceSelector.appendChild(document.createTextNode('Select a device: '));
@@ -22,4 +22,4 @@ socket.on('devices', function(devices) {
   };
   deviceSelector.appendChild(dropdown);
   document.body.appendChild(deviceSelector);
-});
+});*/

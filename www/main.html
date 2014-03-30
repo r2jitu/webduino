@@ -8,14 +8,6 @@
 
     <link rel="stylesheet" href="css/foundation.css" />
     <script src="js/modernizr.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-    var socket = io.connect();
-
-    function robot(data) {
-      socket.emit('robot', data);
-    }
-  </script>
   </head>
   <body>
 
@@ -48,11 +40,15 @@
 
       <article>
 
-        <h3><a href="robot.html">Robot</a></h3>
+        <h3><a href="#">Welcome</a></h3>
 
-        <p>Use the arrow keys to control the roboy.</p>
+        <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa.</p>
+        <p>Boudin aliqua adipisicing rump corned beef. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
 
-        <p id="robot_state"></p>
+        <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
+
+        <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
+
       </article>
 
     </div>
@@ -81,36 +77,12 @@
     </div>
   </footer>
     <script src="js/jquery.js"></script>
-    <script src="js/foundation.js"></script>
+    <script src="js/templates/foundation.js"></script>
     <script>
       $(document).foundation();
 
       var doc = document.documentElement;
       doc.setAttribute('data-useragent', navigator.userAgent);
-    </script>
-    <script type="text/javascript">
-      $(document).keydown(function(e){
-          if (e.keyCode == 37) {
-             $('#robot_state').text('Left pressed.');
-             robot({left: 0, right: 255});
-             return false;
-          }
-          if (e.keyCode == 39) {
-             $('#robot_state').text('Right pressed.');
-             robot({left: 255, right: 0});
-             return false;
-          }
-          if (e.keyCode == 38) {
-             $('#robot_state').text('Up pressed.');
-             robot({left: 255, right: 255})
-             return false;
-          }
-          if (e.keyCode == 40) {
-             $('#robot_state').text('Down pressed.');
-             robot({left: 0, right: 0});
-             return false;
-          }
-      });
     </script>
   </body>
 </html>
