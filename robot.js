@@ -22,7 +22,7 @@ Robot.prototype.setLeft = function (value) {
   }
 };
 
-Robot.prototype.setRight - function (value) {
+Robot.prototype.setRight = function (value) {
   if (value == 0) {
     this.board.analogWrite(PWM_R, 0);
   } else {
@@ -32,14 +32,14 @@ Robot.prototype.setRight - function (value) {
 };
 
 Robot.prototype.bindSocket = function (socket) {
-  socket.on('robot', function (data) {
+  socket.on('robot', (function (data) {
     if ('left' in data) {
       this.setLeft(data.left);
     }
     if ('right' in data) {
       this.setRight(data.right);
     }
-  });
+  }).bind(this));
 };
 
 exports.create = function (descriptor) {
