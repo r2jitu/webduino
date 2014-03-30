@@ -35,7 +35,6 @@ Light.prototype.bindSocket = function (socket) {
 
         var slice = Math.floor(_hue / 60.0);
         var hue_frac = (_hue / 60.0) - slice;
-        console.log(slice, hue_frac);
 
         var aa = _brightness * (1.0 - _sat);
         var bb = _brightness * (1.0 - _sat * hue_frac);
