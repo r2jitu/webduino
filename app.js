@@ -1,16 +1,16 @@
 var app = require('http').createServer(handler)
   , io = require('socket.io').listen(app)
   , fs = require('fs')
+  , jf = require('jsonfile')
   , arduino = require('duino')
+  , util = require('util')
 
-var deviceDescriptors = {
-  light: {
-    device: '/dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_753303039343513031E1-if00'
-  },
-  robot: {
-    device: '/dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_75330303934351202011-if00'
-  }
-};
+if (process.argv.length < 3) {
+  console.log('Need to specify a config file');
+  return;
+}
+
+var config = jf.readFileSync(process.argv[2]);
 
 app.listen(8080);
 
@@ -29,16 +29,15 @@ function handler(req, res) {
 
 var boards = {};
 
-for (var deviceName in deviceDescriptors) {
-  var descriptor = deviceDescriptors[deviceName]
+for (var deviceName in config.devices) {
+  var descriptor = config.devices[deviceName]
   if (fs.existsSync(descriptor.device)) {
     console.log('Connected device: ' + deviceName);
     boards[deviceName] = {
       board: new arduino.Board({
         debug: true,
         device: descriptor.device
-      }),
-      isLedOn: false
+      })
     };
   }
 }

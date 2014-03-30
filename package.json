@@ -2,7 +2,8 @@
   "name": "webduino",
   "description": "Webduino",
   "dependencies": {
-    "socket.io": ">= 0.9",
-    "duino": "r2jitu/duino"
+    "duino": "r2jitu/duino",
+    "jsonfile": ">= 1.1.1",
+    "socket.io": ">= 0.9"
   }
 }

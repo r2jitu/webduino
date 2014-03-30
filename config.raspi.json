@@ -1,0 +1,10 @@
+{
+  "devices": {
+    "light": {
+      "device": "/dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_753303039343513031E1-if00"
+    },
+    "robot": {
+      "device": "/dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_75330303934351202011-if00"
+    }
+  }
+}

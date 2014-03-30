@@ -1,0 +1,10 @@
+{
+  "devices": {
+    "light": {
+      "device": "/dev/tty.usbmodem1d1141"
+    },
+    "robot": {
+      "device": "/dev/tty.usbmodem1d1131"
+    }
+  }
+}
