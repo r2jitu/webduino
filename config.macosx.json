@@ -1,10 +1,12 @@
 {
   "devices": {
     "light": {
-      "device": "/dev/tty.usbmodem1d1141"
+      "device": "/dev/tty.usbmodem1d1141",
+      "module": "./light.js"
     },
     "robot": {
-      "device": "/dev/tty.usbmodem1d1131"
+      "device": "/dev/tty.usbmodem1d1131",
+      "module": "./robot.js"
     }
   }
 }
