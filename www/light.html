@@ -1,20 +1,129 @@
 <!doctype html>
-<html>
-<head>
-  <title>Light - Webduino</title>
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="/common.js"></script>
-  <script>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webduino Demo</title>
+    <script src="js/jquery.js"></script>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="js/modernizr.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script>
     var socket = io.connect();
 
-    function ledToggle(device) {
-      socket.emit('led toggle', {
-        device: 'light'
-      });
+    function robot(data) {
+      socket.emit('robot', data);
     }
   </script>
-</head>
-<body>
-  <button onclick="ledToggle('light')">Toggle LED - light</button>
-</body>
+  <style type="text/css">
+  #slider {
+    float: left;
+    clear: left;
+    width: 300px;
+    margin: 15px;
+  }
+  </style>
+  </head>
+  <body>
+
+
+<!-- Nav Bar -->
+
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="nav-bar right">
+       <ul class="button-group">
+         <li><a href="light.html" class="button">Lights</a></li>
+         <li><a href="robot.html" class="button">Robot</a></li>
+         <li><a href="hangouts.html" class="button">Hangouts</a></li>
+        </ul>
+      </div>
+      <h1>Webduino <small>Control Everything™</small></h1>
+      <hr />
+    </div>
+  </div>
+
+  <!-- End Nav -->
+
+
+  <!-- Main Page Content and Sidebar -->
+
+  <div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns large-centered" role="content">
+
+      <article>
+
+        <h3><a href="light.html">Lights</a></h3>
+        <p id="brightness_txt">Brightness (127)<p>
+        <div id="brightness"></div>
+
+        <p id="hue_txt">Hue (127)<p>
+        <div id="hue"></div>
+      </article>
+
+    </div>
+
+  </div>
+
+  <!-- End Main Content and Sidebar -->
+
+
+  <!-- Footer -->
+
+  <footer class="row">
+    <div class="large-12 columns">
+      <hr />
+      <div class="row">
+        <div class="large-6 columns">
+          <p>&copy; Copyright no one at all. Go to town.</p>
+        </div>
+        <div class="large-6 columns">
+          <ul class="inline-list right">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+    <script src="js/foundation.js"></script>
+    <script>
+      $(document).foundation();
+
+      var doc = document.documentElement;
+      doc.setAttribute('data-useragent', navigator.userAgent);
+    </script>
+    <script type="text/javascript">
+      var socket = io.connect();
+
+      function refresh() {
+        var brightnessValue = $( "#brightness" ).slider( "value" );
+        var hueValue = $( "#hue" ).slider( "value" );
+        $("#brightness_txt").text("Brightness (" + brightnessValue + ")");
+        $("#hue_txt").text("Hue (" + hueValue + ")");
+        socket.emit('light', {
+          brightness: brightnessValue,
+          hue : hueValue
+        });
+      }
+
+      $(function() {
+        $( "#brightness, #hue" ).slider({
+          orientation: "horizontal",
+          range: "min",
+          min: 0,
+          max: 255,
+          value: 127,
+          slide: refresh,
+          change: refresh
+        });
+      });
+    </script>
+  </body>
 </html>
