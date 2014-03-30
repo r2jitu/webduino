@@ -60,10 +60,10 @@
       <article>
 
         <h3><a href="light.html">Lights</a></h3>
-        <p id="brightness_txt">Brightness (127)<p>
+        <p id="brightness_txt">Brightness (50)<p>
         <div id="brightness"></div>
 
-        <p id="hue_txt">Hue (127)<p>
+        <p id="hue_txt">Hue (180)<p>
         <div id="hue"></div>
       </article>
 
@@ -114,12 +114,21 @@
       }
 
       $(function() {
-        $( "#brightness, #hue" ).slider({
+        $( "#brightness" ).slider({
           orientation: "horizontal",
           range: "min",
           min: 0,
-          max: 255,
-          value: 127,
+          max: 100,
+          value: 50,
+          slide: refresh,
+          change: refresh
+        });
+        $( "#hue" ).slider({
+          orientation: "horizontal",
+          range: "min",
+          min: 0,
+          max: 360,
+          value: 180,
           slide: refresh,
           change: refresh
         });

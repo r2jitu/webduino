@@ -47,6 +47,10 @@ io.sockets.on('connection', function (socket) {
     }
   });
 
+  if (devices['light']) {
+    devices['light'].bindSocket(socket);
+  }
+
   if (devices['robot']) {
     devices['robot'].bindSocket(socket);
   }
