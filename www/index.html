@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+  <title>Webduino</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/common.js"></script>
+  <script>
+    function ledToggle(device) {
+      socket.emit('led toggle', {
+        device: device
+      });
+    }
+  </script>
+</head>
+<body>
+  <button onclick="ledToggle('light')">Toggle LED - light</button>
+  <button onclick="ledToggle('robot')">Toggle LED - robot</button>
+  <hr>
+</body>
+</html>
